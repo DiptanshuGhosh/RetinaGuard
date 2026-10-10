@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DR Screening Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .images { display: flex; gap: 20px; margin: 20px 0; }
+        .images figure { flex: 1; text-align: center; }
+        .images img { width: 100%; border-radius: 8px; border: 1px solid #ddd; }
+        .result-card { padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .referable { background: #fdecea; border: 1px solid #f44336; }
+        .not-referable { background: #eafaf1; border: 1px solid #4caf50; }
+        .prob-bar-bg { background: #eee; border-radius: 4px; overflow: hidden; height: 18px; margin: 4px 0; }
+        .prob-bar-fill { background: #3b82f6; height: 100%; text-align: right; color: white; font-size: 11px; padding-right: 4px; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 4px 0; }
+    </style>
+</head>
+<body>
+    <h1>Screening Result</h1>
+
+    <div class="result-card {{ 'referable' if is_referable else 'not-referable' }}">
+        <h2>{{ diagnosis }}</h2>
+        <p>Confidence: <strong>{{ confidence }}%</strong></p>
+        <p>
+            {% if is_referable %}
+                ⚠️ Referable DR — recommend ophthalmologist review.
+            {% else %}
+                ✅ Not referable — routine follow-up interval applies.
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="images">
+        <figure>
+            <img src="{{ user_image }}" alt="Uploaded fundus image">
+            <figcaption>Original image</figcaption>
+        </figure>
+        <figure>
+            <img src="{{ gradcam_image }}" alt="Grad-CAM overlay">
+            <figcaption>Grad-CAM attention (why the model decided this)</figcaption>
+        </figure>
+    </div>
+
+    <h3>Full probability breakdown</h3>
+    <table>
+        {% for row in probability_breakdown %}
+        <tr>
+            <td style="width: 220px;">{{ row.label }}</td>
+            <td>
+                <div class="prob-bar-bg">
+                    <div class="prob-bar-fill" style="width: {{ (row.probability * 100) | round(1) }}%;">
+                        {{ (row.probability * 100) | round(1) }}%
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="/">← Screen another image</a></p>
+</body>
+</html>

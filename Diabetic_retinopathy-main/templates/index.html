@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Diabetic Retinopathy Detection</title>
+  <meta name="description" content="Predict diabetic retinopathy diagnosis using a convolutional neural network (CNN) model. Upload a scanned retina image to check the result with probabilities.">
+    <meta name="keywords" content="diabetic retinopathy, retinal image analysis, CNN model, prediction, classification, deep learning, medical imaging">
+    <meta name="author" content="Ajmal Akram">
+    <meta property="og:title" content="Predict Diagnosis - Diabetic Retinopathy Detection">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: FlexStart
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="static/assets/img/logo.png" alt="">
+        <span>DR</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          
+
+          <li><a class="nav-link scrollto" href="#footer">Contact</a></li>
+          <li><a class="getstarted scrollto" href="#predict">Predict</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">RETINA NET : WEB BASED DIABETIC RETINOPATHY DETECTION SYSTEM</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">Aims to detect and classify retinal images for diabetic retinopathy diagnosis.</h2>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
+              <a href="#predict" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Predict</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="static/assets/img/hero-img.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row gx-0">
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>Project Overview</h3>
+              <h2>We are committed to combating the effects of diabetic retinopathy, a condition stemming from elevated blood sugar levels in individuals with diabetes. As advocates for ocular health, we've developed a groundbreaking solution boasting a test set accuracy surpassing 91%. </h2>
+              <p>
+                By strategically addressing data constraints through innovative methods such as data collection, augmentation, and synthetic integration, alongside implementing uncertainty estimation techniques to minimize diagnostic errors, we're paving the way for more accurate and scalable diabetic retinopathy classification. With our focus on leveraging CNNs to handle larger datasets and intricate classifications, we're dedicated to revolutionizing diabetic retinopathy diagnosis and treatment.
+              </p>
+              <div class="text-center text-lg-start">
+                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Read More</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <img src="static/assets/img/about.jpg" class="img-fluid" alt="">
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- End About Section -->
+
+    <!-- ======= Values Section ======= -->
+    <section id="values" class="values">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Our Solution</h2>
+        </header>
+
+        <div class="row">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="box">
+              <img src="static/assets/img/values-1.png" class="img-fluid" alt="">
+              <h3>Data-driven solutions</h3>
+              <p>Addressing data limitations through data collection, augmentation could be explored.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+            <div class="box">
+              <img src="static/assets/img/values-2.png" class="img-fluid" alt="">
+              <h3>Improved Accuracy</h3>
+              <p>The model achieves an accuracy of over 91% on the test set, demonstrating its effectiveness in classifying DR.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+            <div class="box">
+              <img src="static/assets/img/values-3.png" class="img-fluid" alt="">
+              <h3>Scalability</h3>
+              <p>CNNs can be scaled to handle larger datasets and more complex classification tasks.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- End Values Section -->
+
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-graph-up-arrow" style="color: #ee6c20;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="2554" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Training Dataset</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-activity" style="color: #15be56;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="550" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Testing Dataset</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-check-all" style="color: #bb0852;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="551" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Validation Dataset</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Counts Section -->
+
+    <section id="predict">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 align-items-center">
+
+         <div class="col-lg-5 col-md-6">
+          <img src="static/assets/img/predict.jpg" alt="">
+         </div>
+
+         <div class="col-lg-5 col-md-6">
+          <header class="section-header">
+            <h2>Upload Scanned Retina</h2>
+            <p>Check Result</p>
+          </header>
+
+          <form class="form-inline" action="/predict" method="post" enctype="multipart/form-data">
+          
+          <input class="form-control form-control-lg" id="formFileLg" type="file" name="file" /> <br>
+          
+                <span><input type="submit" class="btn btn-success" value="Predict"></span>
+        
+        </form>
+       </div>
+        </div>
+        <div class="row gy-4"></div>
+      </div>
+    </section>
+
+    
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Team</h2>
+          <p></p>
+        </header>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <div class="member-img">
+                <img src="static/assets/img/team/team1.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Anant Singh</h4>
+                <span>Research & Pitch Strategy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <div class="member-img">
+                <img src="static/assets/img/team/team2.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Priyanshi Mishra</h4>
+                <span>Presentation & QA Testing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="member-img">
+                <img src="static/assets/img/team/team3.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Diptanshu Ghosh</h4>
+                <span>Lead Developer & Presentation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <div class="member-img">
+                <img src="static/assets/img/team/team4.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Akshita Sharnagat</h4>
+                <span>Research & Pitch Strategy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <div class="member-img">
+                <img src="static/assets/img/team/team5.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Paramveer Singh</h4>
+                <span>Software Developer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="member-img">
+                <img src="static/assets/img/team/team6.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                <h4>Jaivardhan Rai</h4>
+                <span>Presentation Design</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- End Team Section -->
+
+    
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <img src="static/assets/img/logo.png" alt="">
+              <span>DR</span>
+            </a>
+            <p>External Links</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Reference Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://www.mdpi.com/2227-9032/11/6/863">Deep Learning-Based Prediction of Diabetic Retinopathy Using CLAHE and ESRGAN for Enhancement</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://www.nature.com/articles/s41591-023-02742-5">A deep learning system for predicting time to progression of diabetic retinopathy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9819317/">Deep Learning for the Detection and Classification of Diabetic Retinopathy with an Improved Activation Function</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://www.nature.com/articles/s41467-021-23458-5">A deep learning system for detecting diabetic retinopathy across the disease spectrum</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9914068/https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9914068/">A Survey on Deep-Learning-Based Diabetic Retinopathy Classification</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Further links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://en.wikipedia.org/wiki/Diabetic_retinopathy">Diabetic Retinopathy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://www.mayoclinic.org/diseases-conditions/diabetic-retinopathy/symptoms-causes/syc-20371611">Symptoms & Causes</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases/diabetic-retinopathy#:~:text=Diabetic%20retinopathy%20is%20caused%20by,vessels%20all%20over%20the%20body.">Treatments</a></li>
+              
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              Bharati Vidyapeeth, <br>
+              Pune, Maharashtra<br>
+              India. <br><br>
+              <strong>Phone:</strong> [ADD PHONE]<br>
+              <strong>Email:</strong> [ADD EMAIL]<br>
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>DR</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="static/assets/vendor/aos/aos.js"></script>
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+
+</body>
+
+</html>
