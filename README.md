@@ -13,7 +13,7 @@ A web app that lets a health worker upload a retinal (fundus) photo and get an i
 Diabetic retinopathy damages the retina quietly, often with no symptoms until the damage is advanced. Early screening is what prevents blindness, but specialist access in rural India is limited. Our goal is to put a first-line screening checkpoint in the hands of a community health worker, at the point of care, with output a doctor can verify quickly.
 
 <p align="center">
-  <img src="Documents/images/problem-statement.jpeg" alt="SIH26038 problem statement" width="650">
+  <img src="Diabetic_retinopathy-main/Documents/images/problem-statement.jpeg" alt="SIH26038 problem statement" width="650">
 </p>
 
 ---
@@ -32,17 +32,17 @@ Diabetic retinopathy damages the retina quietly, often with no symptoms until th
 
 ### Upload page
 <p align="center">
-  <img src="Documents/images/upload-page.png" alt="Upload page" width="800">
+  <img src="Diabetic_retinopathy-main/Documents/images/upload-page.png" alt="Upload page" width="800">
 </p>
 
 ### Result with Grad-CAM explanation: DR detected
 <p align="center">
-  <img src="Documents/images/result-dr-detected.png" alt="DR detected result with Grad-CAM overlay" width="800">
+  <img src="Diabetic_retinopathy-main/Documents/images/result-dr-detected.png" alt="DR detected result with Grad-CAM overlay" width="800">
 </p>
 
 ### Result with Grad-CAM explanation: healthy retina
 <p align="center">
-  <img src="Documents/images/result-healthy.png" alt="Healthy result with Grad-CAM overlay" width="800">
+  <img src="Diabetic_retinopathy-main/Documents/images/result-healthy.png" alt="Healthy result with Grad-CAM overlay" width="800">
 </p>
 
 ---
@@ -115,7 +115,7 @@ Then open **http://127.0.0.1:5000** in your browser, scroll to **Upload Scanned 
 │   └── predict.html     # Result page
 ├── static/              # CSS, JS, images, generated Grad-CAM overlays
 ├── uploads/             # Uploaded scans
-├── Documents/images/         # README screenshots
+├── Diabetic_retinopathy-main/Documents/images/         # README screenshots
 ├── LICENSE
 └── README.md
 ```
@@ -142,12 +142,12 @@ We want to be upfront about where this stands.
 
 **Mild DR example predicted as "No DR" at 100% confidence**
 <p align="center">
-  <img src="Documents/images/limitation-missed-mild-dr.png" alt="False negative on a mild DR image" width="800">
+  <img src="Diabetic_retinopathy-main/Documents/images/limitation-missed-mild-dr.png" alt="False negative on a mild DR image" width="800">
 </p>
 
 **A normal external eye photo (not a fundus image) classified with 100% confidence**
 <p align="center">
-  <img src="Documents/images/limitation-non-fundus-input.png" alt="Non-fundus image classified confidently" width="800">
+  <img src="Diabetic_retinopathy-main/Documents/images/limitation-non-fundus-input.png" alt="Non-fundus image classified confidently" width="800">
 </p>
 
 </details>
